@@ -76,69 +76,56 @@ class _ListPageState extends State<ListPage> {
         ],
       ),
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: [
-            Flexible(
-                flex: 1,
-                fit: FlexFit.tight,
-                child: Container(
-                  child: ListView(
-                    children: allProducts
-                        .map(
-                          (e) => AnimatedContainer(
-                            padding: EdgeInsets.all(10),
-                            duration: const Duration(
-                              milliseconds: 3000,
-                            ),
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: ListTile(
-                                dense: true,
-                                onTap: () {
-                                  setState(() {
-                                    e.isSelected = !e.isSelected!;
-                                    e.isSelected! ? _counter++ : _counter--;
-                                    if (e.isSelected!) {
-                                      locator.get<Utils>().showAlert(
-                                            "${e.productName} added",
-                                            backgroundColor: Colors.green,
-                                          );
-                                    }
-                                  });
-                                },
-                                isThreeLine: true,
-                                selected: e.isSelected!,
-                                // iconColor: e.isSelected!
-                                //     ? Colors.yellow
-                                //     : Colors.green,
-                                trailing: Icon(
-                                  e.isSelected!
-                                      ? Icons.remove_circle
-                                      : Icons.add,
-                                ),
-                                leading: Icon(
-                                  e.isSelected!
-                                      ? Icons.card_giftcard_sharp
-                                      : Icons.hourglass_empty_sharp,
-                                ),
-                                subtitle: Text(
-                                  e.isSelected!
-                                      ? 'Added to cart'
-                                      : '₹ ${e.cost} - ready to add',
-                                ),
-                                title: Text(
-                                  '${e.productName}',
-                                ),
-                              ),
-                            ),
-                          ),
-                        )
-                        .toList(),
+        child: ListView(
+          children: allProducts
+              .map(
+                (e) => AnimatedContainer(
+                  padding: EdgeInsets.all(10),
+                  duration: const Duration(
+                    milliseconds: 3000,
                   ),
-                ))
-          ],
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: ListTile(
+                      dense: true,
+                      onTap: () {
+                        setState(() {
+                          e.isSelected = !e.isSelected!;
+                          e.isSelected! ? _counter++ : _counter--;
+                          if (e.isSelected!) {
+                            locator.get<Utils>().showAlert(
+                                  "${e.productName} added",
+                                  backgroundColor: Colors.green,
+                                );
+                          }
+                        });
+                      },
+                      isThreeLine: true,
+                      selected: e.isSelected!,
+                      // iconColor: e.isSelected!
+                      //     ? Colors.yellow
+                      //     : Colors.green,
+                      trailing: Icon(
+                        e.isSelected! ? Icons.remove_circle : Icons.add,
+                      ),
+                      leading: Icon(
+                        e.isSelected!
+                            ? Icons.card_giftcard_sharp
+                            : Icons.hourglass_empty_sharp,
+                      ),
+                      subtitle: Text(
+                        e.isSelected!
+                            ? 'Added to cart'
+                            : '₹ ${e.cost} - ready to add',
+                      ),
+                      title: Text(
+                        '${e.productName}',
+                      ),
+                    ),
+                  ),
+                ),
+              )
+              .toList(),
         ),
       ),
     );

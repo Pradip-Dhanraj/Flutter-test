@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hiringtest/models/product.dart';
+import 'package:hiringtest/utils/locator-utils.dart';
+import 'package:hiringtest/utils/utils.dart';
 
 class AddedProductsPage extends StatefulWidget {
   final Object? arguments;
@@ -68,12 +70,15 @@ class _AddedProductsPageState extends State<AddedProductsPage> {
                                             .where((element) =>
                                                 element.isSelected!)
                                             .toList();
-                                        if (allProducts.isEmpty) {
-                                          _totalCost = 0;
-                                        } else {
-                                          allProducts.forEach((element) {
-                                            _totalCost -= element.cost!;
-                                          });
+                                        _totalCost = 0;
+                                        allProducts.forEach((element) {
+                                          _totalCost += element.cost!;
+                                        });
+                                        if (!e.isSelected!) {
+                                          locator.get<Utils>().showAlert(
+                                                "${e.productName} removed,\n Total Cost : ₹ $_totalCost ",
+                                                backgroundColor: Colors.red,
+                                              );
                                         }
                                       });
                                     },

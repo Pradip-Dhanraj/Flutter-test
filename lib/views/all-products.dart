@@ -6,6 +6,7 @@ import 'package:hiringtest/services/mock-service.dart';
 import 'package:hiringtest/utils/locator-utils.dart';
 import 'package:hiringtest/utils/navigation-utils.dart';
 import 'package:hiringtest/utils/route-utils.dart';
+import 'package:hiringtest/utils/utils.dart';
 
 class ListPage extends StatefulWidget {
   const ListPage({Key? key}) : super(key: key);
@@ -99,6 +100,12 @@ class _ListPageState extends State<ListPage> {
                                   setState(() {
                                     e.isSelected = !e.isSelected!;
                                     e.isSelected! ? _counter++ : _counter--;
+                                    if (e.isSelected!) {
+                                      locator.get<Utils>().showAlert(
+                                            "${e.productName} added",
+                                            backgroundColor: Colors.green,
+                                          );
+                                    }
                                   });
                                 },
                                 isThreeLine: true,
